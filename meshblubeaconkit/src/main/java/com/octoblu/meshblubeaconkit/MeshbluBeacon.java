@@ -245,9 +245,11 @@ public class MeshbluBeacon implements BootstrapNotifier, BeaconConsumer {
             DecimalFormat df = new DecimalFormat("#.000");
             String distance = df.format(beacon.getDistance());
             Log.d(TAG, "Beacon (" + uuid.substring(0, 8) + ") is about " + distance + " meters away.");
-
-            if(isBeaconEnabled(uuid) != null){
-                sendBeaconChangeMessage(beacon);
+            Boolean enabled = isBeaconEnabled(uuid);
+            if(enabled != null){
+                if(enabled) {
+                    sendBeaconChangeMessage(beacon);
+                }
             }else{
                 emitter.emit(EVENTS.DISCOVERED_BEACON, beacon);
             }
@@ -283,7 +285,7 @@ public class MeshbluBeacon implements BootstrapNotifier, BeaconConsumer {
         Double distance = beacon.getDistance();
         if(beaconInfo.hasChangedDistance(distance)){
             meshblu.message(message);
-            emitter.emit(EVENTS.LOCATION_UPDATE, payload);
+            emitter.emit(EVENTS.LOCATION_UPDATE, payload, beaconInfo);
         }
         beaconInfo.setLastDistance(distance);
     }
