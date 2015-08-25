@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.github.nkzawa.emitter.Emitter;
 
-import com.octoblu.meshblukit.MeshbluKit;
+import com.octoblu.meshblukit.Meshblu;
 import com.octoblu.sanejsonobject.SaneJSONObject;
 
 import org.altbeacon.beacon.Beacon;
@@ -29,7 +29,9 @@ import org.json.JSONObject;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class MeshbluBeacon implements BootstrapNotifier, BeaconConsumer {
